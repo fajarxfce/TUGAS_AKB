@@ -10,11 +10,16 @@ Matkul  : Aplikasi Komputer Bergerak
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.a10120014.nurulfajar.adapter.SectionPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +36,10 @@ public class SettingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    View myFragment;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -67,6 +76,40 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+        myFragment =  inflater.inflate(R.layout.fragment_setting, container, false);
+        viewPager = myFragment.findViewById(R.id.viewPager);
+        tabLayout = myFragment.findViewById(R.id.tabLayout);
+        return myFragment;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setUpViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private void setUpViewPager(ViewPager viewPager) {
+        SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new AboutFragment(), "About");
+        adapter.addFragment(new Tab1Fragment(), " Tab 1");
+        adapter.addFragment(new Tab2Fragment(), "Tab 2");
+        viewPager.setAdapter(adapter);
     }
 }
