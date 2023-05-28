@@ -45,9 +45,9 @@ public class EditorActivity extends AppCompatActivity {
         Description = getIntent().getStringExtra("description");
 
         if (String.valueOf(Id) == null || String.valueOf(Id).equals("")){
-            setTitle("Tambah User");
+            setTitle("Tambah Notes");
         }else {
-            setTitle("Tambah User");
+            setTitle("Edit Notes");
             EtTitle.setText(Title);
             EtCategory.setText(Category);
             EtDescription.setText(Description);
